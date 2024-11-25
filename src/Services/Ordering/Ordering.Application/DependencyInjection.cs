@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Ordering.Application
 {
@@ -8,6 +8,10 @@ namespace Ordering.Application
         public static IServiceCollection AddApplicationServices
             (this IServiceCollection services)
         {
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+            });
             return services;
         }
     }
